@@ -13,7 +13,7 @@ void insertarPiezaColeccionPiezas(TColeccionPiezas &coleccionPiezas, TPieza piez
 }
 
 void imprimirColeccionPiezas(TColeccionPiezas coleccionPiezas){
-   
+    
 }
 
 bool esVaciaColeccionPiezas(TColeccionPiezas piezas){
@@ -29,7 +29,7 @@ TPieza obtenerPiezaColeccionPiezas(TColeccionPiezas coleccionPiezas, int idPieza
 }
 
 void removerPiezaColeccionPiezas(TColeccionPiezas &coleccionPiezas, int idPieza){
-   
+    
 }
 
 void liberarColeccionPiezas(TColeccionPiezas &coleccionPiezas){
