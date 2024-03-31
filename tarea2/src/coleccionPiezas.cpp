@@ -37,19 +37,54 @@ void imprimirColeccionPiezas(TColeccionPiezas coleccionPiezas){
 }
 
 bool esVaciaColeccionPiezas(TColeccionPiezas piezas){
-    return true;
+    return piezas == NULL;
 }
 
 bool existePiezaColeccionPiezas(TColeccionPiezas coleccionPiezas, int idPieza){
-    return true;
+    TColeccionPiezas actual = coleccionPiezas;
+    while (actual != NULL) {
+        if (idTPieza(actual -> pieza) == idPieza) {
+            return true;
+        }
+        actual = *actual -> sig;
+    }
+    return false;
 }
 
 TPieza obtenerPiezaColeccionPiezas(TColeccionPiezas coleccionPiezas, int idPieza){
+    TColeccionPiezas actual = coleccionPiezas;
+    while (actual != NULL) {
+        if (idTPieza(actual -> pieza) == idPieza) {
+            return actual->pieza;
+        }
+        actual = *actual -> sig;
+    }
     return NULL;
 }
 
 void removerPiezaColeccionPiezas(TColeccionPiezas &coleccionPiezas, int idPieza){
-    
+    if (coleccionPiezas == NULL) {
+        return;
+    }
+    if (idTPieza(coleccionPiezas -> pieza) == idPieza) {
+        TColeccionPiezas temp = coleccionPiezas;
+        coleccionPiezas = *coleccionPiezas -> sig;
+        liberarTPieza(temp -> pieza);
+        delete temp;
+        return;
+    }
+    TColeccionPiezas prev = coleccionPiezas;
+    TColeccionPiezas current = *coleccionPiezas -> sig;
+    while (current != NULL) {
+        if (idTPieza(current -> pieza) == idPieza) {
+            prev -> sig = current -> sig;
+            liberarTPieza(current -> pieza);
+            delete current;
+            return;
+        }
+        prev = current;
+        current = *current -> sig;
+    }
 }
 
 void liberarColeccionPiezas(TColeccionPiezas &coleccionPiezas){
