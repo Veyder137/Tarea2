@@ -42,6 +42,7 @@ void liberarTVisitante(TVisitante &visitante){
 
 TVisitante copiarTVisitante(TVisitante visitante){
     TVisitante copiaVis;
+    copiaVis = new rep_visitante;
     copiaVis -> id = visitante -> id;
     strcpy(copiaVis -> nVis, visitante -> nVis);
     strcpy(copiaVis -> aVis, visitante -> aVis);
@@ -52,7 +53,7 @@ TVisitante copiarTVisitante(TVisitante visitante){
 
 void imprimirTVisitante(TVisitante visitante){
     printf ("Visitante %s %s\n", visitante -> nVis, visitante -> aVis);
-    printf ("ID: %d\n", visitante -> id);
-    printf ("Edad: %d", visitante -> edad);
+    printf ("Id: %d\n", visitante -> id);
+    printf ("Edad: %d\n", visitante -> edad);
 }
 
