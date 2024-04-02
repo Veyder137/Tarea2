@@ -2,7 +2,7 @@
 
 struct rep_coleccionpiezas{
     TPieza pieza;
-    TColeccionPiezas * sig;
+    rep_coleccionpiezas * sig;
 };
 
 TColeccionPiezas crearColeccionPiezasVacia(){ 
@@ -15,16 +15,16 @@ void insertarPiezaColeccionPiezas(TColeccionPiezas &coleccionPiezas, TPieza piez
     aux -> sig = NULL;
 
     if (coleccionPiezas == NULL || (idTPieza(pieza) < idTPieza(coleccionPiezas -> pieza))) {
-        *aux -> sig = coleccionPiezas;
+        aux -> sig = coleccionPiezas;
         coleccionPiezas = aux;
     }
     else {
         TColeccionPiezas actual = coleccionPiezas;
         while (actual -> sig != NULL && idTPieza(pieza) > idTPieza(actual -> sig -> pieza)){
-            actual = *actual -> sig;
+            actual = actual -> sig;
         }
         aux -> sig = actual -> sig;
-        *actual -> sig = aux;
+        actual -> sig = aux;
     }
 }
 
@@ -33,7 +33,7 @@ void imprimirColeccionPiezas(TColeccionPiezas coleccionPiezas){
     if (esVaciaColeccionPiezas (coleccionPiezas) == false) {
         while (actual != NULL) {
             imprimirTPieza(actual -> pieza);
-            actual = *actual -> sig;
+            actual = actual -> sig;
     }
     }
 }
@@ -48,7 +48,7 @@ bool existePiezaColeccionPiezas(TColeccionPiezas coleccionPiezas, int idPieza){
         if (idTPieza(actual -> pieza) == idPieza) {
             return true;
         }
-        actual = *actual -> sig;
+        actual = actual -> sig;
     }
     return false;
 }
@@ -59,9 +59,9 @@ TPieza obtenerPiezaColeccionPiezas(TColeccionPiezas coleccionPiezas, int idPieza
         if (idTPieza(actual -> pieza) == idPieza) {
             return actual -> pieza;
         }
-        actual = *actual -> sig;
+        actual = actual -> sig;
     }
-    return;
+    return coleccionPiezas -> pieza;
 }
 
 void removerPiezaColeccionPiezas(TColeccionPiezas &coleccionPiezas, int idPieza){
@@ -70,7 +70,7 @@ void removerPiezaColeccionPiezas(TColeccionPiezas &coleccionPiezas, int idPieza)
     }
     if (idTPieza(coleccionPiezas -> pieza) == idPieza) { //caso pieza en primer lugar
         TColeccionPiezas temp = coleccionPiezas;
-        coleccionPiezas = *coleccionPiezas -> sig;
+        coleccionPiezas = coleccionPiezas -> sig;
         liberarTPieza(temp -> pieza);
         delete temp;
     }
@@ -92,9 +92,9 @@ void removerPiezaColeccionPiezas(TColeccionPiezas &coleccionPiezas, int idPieza)
 void liberarColeccionPiezas(TColeccionPiezas &coleccionPiezas){
     TColeccionPiezas actual = coleccionPiezas;
     while (actual != NULL) {
-        TColeccionPiezas siguiente = *actual -> sig;
+        TColeccionPiezas siguiente = actual -> sig;
         liberarTPieza(actual -> pieza);
-        delete actual;2
+        delete actual;
         actual = siguiente;
     }
     coleccionPiezas = NULL;
