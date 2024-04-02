@@ -1,0 +1,78 @@
+5,8c5
+< 4> Visitante nro 1 del grupoABB:
+< Visitante Rufino Garcia
+< Id: 15
+< Edad: 21
+---
+> 4> No se puede imprimir vistante 1 del grupoABB porque tiene solo 0 visitantes.
+11,18c8,9
+< 7> Visitante nro 1 del grupoABB:
+< Visitante Zafiro Fernandez
+< Id: 3
+< Edad: 25
+< 8> Visitante nro 2 del grupoABB:
+< Visitante Rufino Garcia
+< Id: 15
+< Edad: 21
+---
+> 7> No se puede imprimir vistante 1 del grupoABB porque tiene solo 0 visitantes.
+> 8> No se puede imprimir vistante 2 del grupoABB porque tiene solo 0 visitantes.
+35,74c26,35
+< 25> Visitante nro 10 del grupoABB:
+< Visitante Casimira Sanchez
+< Id: 25
+< Edad: 26
+< 26> Visitante nro 9 del grupoABB:
+< Visitante Zafiro Sanchez
+< Id: 22
+< Edad: 33
+< 27> Visitante nro 8 del grupoABB:
+< Visitante Esmeralda Garcia
+< Id: 21
+< Edad: 58
+< 28> Visitante nro 7 del grupoABB:
+< Visitante Rufino Gonzalez
+< Id: 20
+< Edad: 23
+< 29> Visitante nro 6 del grupoABB:
+< Visitante Esmeralda Ruiz
+< Id: 19
+< Edad: 32
+< 30> Visitante nro 1 del grupoABB:
+< Visitante Valquiria Ruiz
+< Id: 1
+< Edad: 27
+< 31> Visitante nro 2 del grupoABB:
+< Visitante Rufino Lopez
+< Id: 2
+< Edad: 28
+< 32> Visitante nro 3 del grupoABB:
+< Visitante Zafiro Fernandez
+< Id: 3
+< Edad: 25
+< 33> Visitante nro 4 del grupoABB:
+< Visitante Zafiro Rodriguez
+< Id: 6
+< Edad: 42
+< 34> Visitante nro 5 del grupoABB:
+< Visitante Rufino Garcia
+< Id: 15
+< Edad: 21
+---
+> 25> No se puede imprimir vistante 10 del grupoABB porque tiene solo 0 visitantes.
+> 26> No se puede imprimir vistante 9 del grupoABB porque tiene solo 0 visitantes.
+> 27> No se puede imprimir vistante 8 del grupoABB porque tiene solo 0 visitantes.
+> 28> No se puede imprimir vistante 7 del grupoABB porque tiene solo 0 visitantes.
+> 29> No se puede imprimir vistante 6 del grupoABB porque tiene solo 0 visitantes.
+> 30> No se puede imprimir vistante 1 del grupoABB porque tiene solo 0 visitantes.
+> 31> No se puede imprimir vistante 2 del grupoABB porque tiene solo 0 visitantes.
+> 32> No se puede imprimir vistante 3 del grupoABB porque tiene solo 0 visitantes.
+> 33> No se puede imprimir vistante 4 del grupoABB porque tiene solo 0 visitantes.
+> 34> No se puede imprimir vistante 5 del grupoABB porque tiene solo 0 visitantes.
+76a38,43
+> ==24029== 2,080 bytes in 10 blocks are definitely lost in loss record 1 of 1
+> ==24029==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+> ==24029==    by 0x10B2AE: crearTVisitante(int, char const*, char const*, int) (visitante.cpp:14)
+> ==24029==    by 0x10A110: main_crearVisitante(rep_visitante*&) (principal.cpp:337)
+> ==24029==    by 0x1094FD: main (principal.cpp:161)
+> ==24029== 

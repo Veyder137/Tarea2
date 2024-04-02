@@ -1,0 +1,30 @@
+Bienvenido al programa principal de ArteProg. Por favor ingrese su comando:
+1> El grupoABB ha sido creado de forma exitosa.
+2> Visitante creadox de forma exitosa.
+3> Se ha agregado el visitante al grupo de forma exitosa.
+4> Visitante creadox de forma exitosa.
+5> Se ha agregado el visitante al grupo de forma exitosa.
+6> Visitante creadox de forma exitosa.
+7> Se ha agregado el visitante al grupo de forma exitosa.
+8> Visitante creadox de forma exitosa.
+9> Se ha agregado el visitante al grupo de forma exitosa.
+10> 11> Visitante creadox de forma exitosa.
+12> Se ha agregado el visitante al grupo de forma exitosa.
+13> Visitante creadox de forma exitosa.
+14> Se ha agregado el visitante al grupo de forma exitosa.
+15> Visitante creadox de forma exitosa.
+16> Se ha agregado el visitante al grupo de forma exitosa.
+17> Visitante creadox de forma exitosa.
+18> Se ha agregado el visitante al grupo de forma exitosa.
+19> 20> Visitante creadox de forma exitosa.
+21> Se ha agregado el visitante al grupo de forma exitosa.
+22> Visitante creadox de forma exitosa.
+23> Se ha agregado el visitante al grupo de forma exitosa.
+24> 25> Grupo liberado con exito.
+26> Fin.
+==23993== 2,080 bytes in 10 blocks are definitely lost in loss record 1 of 1
+==23993==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==23993==    by 0x10B2AE: crearTVisitante(int, char const*, char const*, int) (visitante.cpp:14)
+==23993==    by 0x10A110: main_crearVisitante(rep_visitante*&) (principal.cpp:337)
+==23993==    by 0x1094FD: main (principal.cpp:161)
+==23993== 

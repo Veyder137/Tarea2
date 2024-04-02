@@ -27,7 +27,7 @@ int idTPieza(TPieza pieza){
 
 void imprimirTPieza(TPieza pieza){
     printf("Pieza: %d\n", idTPieza(pieza));
-    printf ("%s-%s %s \n", pieza -> nPieza, pieza -> nAutor, pieza -> aAutor);
+    printf ("%s-%s %s\n", pieza -> nPieza, pieza -> nAutor, pieza -> aAutor);
     printf("Creada en: ");
     imprimirTFecha(pieza -> fecha);
 }

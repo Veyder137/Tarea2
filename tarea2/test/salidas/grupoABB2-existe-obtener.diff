@@ -1,0 +1,43 @@
+5,7c5
+< 4> Visitante Artemio Perez
+< Id: 10
+< Edad: 21
+---
+> 4> El visitante con id 10 no se puede imprimir pues NO pertenece al grupo.
+14c12
+< 11> El visitante con id 10 pertenece al grupo.
+---
+> 11> El visitante con id 10 NO pertenece al grupo.
+16c14
+< 13> El visitante con id 2 pertenece al grupo.
+---
+> 13> El visitante con id 2 NO pertenece al grupo.
+18c16
+< 15> El visitante con id 5 pertenece al grupo.
+---
+> 15> El visitante con id 5 NO pertenece al grupo.
+20,31c18,21
+< 17> Visitante Casimira Fernandez
+< Id: 5
+< Edad: 52
+< 18> Visitante Ubaldo Fernandez
+< Id: 3
+< Edad: 19
+< 19> Visitante Artemio Perez
+< Id: 10
+< Edad: 21
+< 20> Visitante Esmeralda Lopez
+< Id: 2
+< Edad: 21
+---
+> 17> El visitante con id 5 no se puede imprimir pues NO pertenece al grupo.
+> 18> El visitante con id 3 no se puede imprimir pues NO pertenece al grupo.
+> 19> El visitante con id 10 no se puede imprimir pues NO pertenece al grupo.
+> 20> El visitante con id 2 no se puede imprimir pues NO pertenece al grupo.
+33a24,29
+> ==24000== 832 bytes in 4 blocks are definitely lost in loss record 1 of 1
+> ==24000==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+> ==24000==    by 0x10B2AE: crearTVisitante(int, char const*, char const*, int) (visitante.cpp:14)
+> ==24000==    by 0x10A110: main_crearVisitante(rep_visitante*&) (principal.cpp:337)
+> ==24000==    by 0x1094FD: main (principal.cpp:161)
+> ==24000== 
