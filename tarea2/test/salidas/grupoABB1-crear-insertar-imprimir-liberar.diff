@@ -1,0 +1,85 @@
+11,23c11
+< 10> Visitante Ubaldo Gonzalez
+< Id: 1
+< Edad: 57
+< Visitante Ubaldo Rodriguez
+< Id: 4
+< Edad: 25
+< Visitante Brunilda Garcia
+< Id: 5
+< Edad: 14
+< Visitante Artemio Martinez
+< Id: 10
+< Edad: 20
+< 11> Visitante creadox de forma exitosa.
+---
+> 10> 11> Visitante creadox de forma exitosa.
+31,55c19
+< 19> Visitante Ubaldo Gonzalez
+< Id: 1
+< Edad: 57
+< Visitante Ubaldo Rodriguez
+< Id: 4
+< Edad: 25
+< Visitante Brunilda Garcia
+< Id: 5
+< Edad: 14
+< Visitante Artemio Martinez
+< Id: 10
+< Edad: 20
+< Visitante Ubaldo Martinez
+< Id: 11
+< Edad: 54
+< Visitante Esmeralda Martinez
+< Id: 12
+< Edad: 20
+< Visitante Zenobia Fernandez
+< Id: 14
+< Edad: 20
+< Visitante Artemio Fernandez
+< Id: 17
+< Edad: 20
+< 20> Visitante creadox de forma exitosa.
+---
+> 19> 20> Visitante creadox de forma exitosa.
+59,89c23
+< 24> Visitante Ubaldo Gonzalez
+< Id: 1
+< Edad: 57
+< Visitante Ubaldo Gomez
+< Id: 2
+< Edad: 24
+< Visitante Zenobia Martinez
+< Id: 3
+< Edad: 23
+< Visitante Ubaldo Rodriguez
+< Id: 4
+< Edad: 25
+< Visitante Brunilda Garcia
+< Id: 5
+< Edad: 14
+< Visitante Artemio Martinez
+< Id: 10
+< Edad: 20
+< Visitante Ubaldo Martinez
+< Id: 11
+< Edad: 54
+< Visitante Esmeralda Martinez
+< Id: 12
+< Edad: 20
+< Visitante Zenobia Fernandez
+< Id: 14
+< Edad: 20
+< Visitante Artemio Fernandez
+< Id: 17
+< Edad: 20
+< 25> Grupo liberado con exito.
+---
+> 24> 25> Grupo liberado con exito.
+90a25,30
+> ==23993== 2,080 bytes in 10 blocks are definitely lost in loss record 1 of 1
+> ==23993==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+> ==23993==    by 0x10B2AE: crearTVisitante(int, char const*, char const*, int) (visitante.cpp:14)
+> ==23993==    by 0x10A110: main_crearVisitante(rep_visitante*&) (principal.cpp:337)
+> ==23993==    by 0x1094FD: main (principal.cpp:161)
+> ==23993== 

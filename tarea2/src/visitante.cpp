@@ -38,6 +38,7 @@ int edadTVisitante(TVisitante visitante){
 
 void liberarTVisitante(TVisitante &visitante){
     delete visitante;
+    visitante = NULL;
 }
 
 TVisitante copiarTVisitante(TVisitante visitante){

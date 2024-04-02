@@ -1,0 +1,25 @@
+==24036== Invalid read of size 4
+==24036==    at 0x10B369: idTVisitante(rep_visitante*) (visitante.cpp:32)
+==24036==    by 0x10AB1A: main_maxIdGrupoABB(rep_grupoABB*) (principal.cpp:526)
+==24036==    by 0x1099E4: main (principal.cpp:224)
+==24036==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==24036== 
+==24036== 
+==24036== Process terminating with default action of signal 11 (SIGSEGV)
+==24036==  Access not within mapped region at address 0x0
+==24036==    at 0x10B369: idTVisitante(rep_visitante*) (visitante.cpp:32)
+==24036==    by 0x10AB1A: main_maxIdGrupoABB(rep_grupoABB*) (principal.cpp:526)
+==24036==    by 0x1099E4: main (principal.cpp:224)
+==24036==  If you believe this happened as a result of a stack
+==24036==  overflow in your program's main thread (unlikely but
+==24036==  possible), you can try to increase the size of the
+==24036==  main thread stack using the --main-stacksize= flag.
+==24036==  The main thread stack size used in this run was 8388608.
+==24036== 2,496 bytes in 12 blocks are definitely lost in loss record 1 of 4
+==24036==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==24036==    by 0x10B2AE: crearTVisitante(int, char const*, char const*, int) (visitante.cpp:14)
+==24036==    by 0x10A110: main_crearVisitante(rep_visitante*&) (principal.cpp:337)
+==24036==    by 0x1094FD: main (principal.cpp:161)
+==24036== 
+timeout: the monitored command dumped core
+Segmentation fault

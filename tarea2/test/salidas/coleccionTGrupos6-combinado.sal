@@ -1,0 +1,9 @@
+principal: principal.cpp:572: void main_agregarGrupoAColeccion(rep_coleccionTGrupos*&, rep_grupoABB*&): Assertion `grupo != NULL' failed.
+==24084== 416 bytes in 2 blocks are definitely lost in loss record 1 of 4
+==24084==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==24084==    by 0x10B2AE: crearTVisitante(int, char const*, char const*, int) (visitante.cpp:14)
+==24084==    by 0x10A110: main_crearVisitante(rep_visitante*&) (principal.cpp:337)
+==24084==    by 0x1094FD: main (principal.cpp:161)
+==24084== 
+timeout: the monitored command dumped core
+Aborted

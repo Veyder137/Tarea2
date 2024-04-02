@@ -1,0 +1,29 @@
+Bienvenido al programa principal de ArteProg. Por favor ingrese su comando:
+1> El grupoABB ha sido creado de forma exitosa.
+2> Visitante creadox de forma exitosa.
+3> Se ha agregado el visitante al grupo de forma exitosa.
+4> El visitante con id 10 no se puede imprimir pues NO pertenece al grupo.
+5> Visitante creadox de forma exitosa.
+6> Se ha agregado el visitante al grupo de forma exitosa.
+7> Visitante creadox de forma exitosa.
+8> Se ha agregado el visitante al grupo de forma exitosa.
+9> Visitante creadox de forma exitosa.
+10> Se ha agregado el visitante al grupo de forma exitosa.
+11> El visitante con id 10 NO pertenece al grupo.
+12> El visitante con id 1 NO pertenece al grupo.
+13> El visitante con id 2 NO pertenece al grupo.
+14> El visitante con id 4 NO pertenece al grupo.
+15> El visitante con id 5 NO pertenece al grupo.
+16> El visitante con id 7 NO pertenece al grupo.
+17> El visitante con id 5 no se puede imprimir pues NO pertenece al grupo.
+18> El visitante con id 3 no se puede imprimir pues NO pertenece al grupo.
+19> El visitante con id 10 no se puede imprimir pues NO pertenece al grupo.
+20> El visitante con id 2 no se puede imprimir pues NO pertenece al grupo.
+21> Grupo liberado con exito.
+22> Fin.
+==24000== 832 bytes in 4 blocks are definitely lost in loss record 1 of 1
+==24000==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==24000==    by 0x10B2AE: crearTVisitante(int, char const*, char const*, int) (visitante.cpp:14)
+==24000==    by 0x10A110: main_crearVisitante(rep_visitante*&) (principal.cpp:337)
+==24000==    by 0x1094FD: main (principal.cpp:161)
+==24000== 
