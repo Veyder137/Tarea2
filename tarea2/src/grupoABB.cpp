@@ -1,7 +1,6 @@
 #include "../include/grupoABB.h"
 
 struct rep_grupoABB {
-    int key;
     TVisitante vis;
     rep_grupoABB *izq, *der;
 };
@@ -14,7 +13,6 @@ TGrupoABB crearTGrupoABBVacio(){
 void insertarTVisitanteTGrupoABB(TGrupoABB &grupoABB, TVisitante visitante){
     TGrupoABB nuevoNodo = new rep_grupoABB;
     nuevoNodo -> vis = visitante;
-    nuevoNodo -> key = idTVisitante(visitante);
     nuevoNodo -> izq = nuevoNodo -> der = NULL;
     
     if (grupoABB == NULL)
@@ -51,8 +49,8 @@ void imprimirTGrupoABB(TGrupoABB grupoABB){
 }
 
 bool existeTVisitanteTGrupoABB(TGrupoABB grupoABB, int idVisitante){
-    while ((grupoABB != NULL) && (grupoABB -> key != idVisitante)){
-        if (grupoABB -> key > idVisitante)
+    while ((grupoABB != NULL) && (idTVisitante(grupoABB -> vis) != idVisitante)){
+        if (idTVisitante(grupoABB -> vis) > idVisitante)
             grupoABB = grupoABB -> izq;
         else 
             grupoABB = grupoABB -> der;
@@ -61,8 +59,8 @@ bool existeTVisitanteTGrupoABB(TGrupoABB grupoABB, int idVisitante){
 }
 
 TVisitante obtenerTVisitanteTGrupoABB(TGrupoABB grupoABB, int idVisitante){
-    while ((grupoABB != NULL) && (grupoABB -> key != idVisitante)){
-        if (grupoABB -> key > idVisitante)
+    while ((grupoABB != NULL) && (idTVisitante(grupoABB -> vis) != idVisitante)){
+        if (idTVisitante(grupoABB -> vis) > idVisitante)
             grupoABB = grupoABB -> izq;
         else 
             grupoABB = grupoABB -> der;
@@ -74,7 +72,6 @@ void removerTVisitanteTGrupoABB(TGrupoABB &grupoABB, int idVisitante){
 
     TGrupoABB reemplazo = new rep_grupoABB;
     reemplazo -> vis = NULL;
-    reemplazo -> key = NULL;
     reemplazo -> izq = reemplazo -> der = NULL;
     
     TGrupoABB padre = NULL;
@@ -143,19 +140,52 @@ void removerTVisitanteTGrupoABB(TGrupoABB &grupoABB, int idVisitante){
 }
 
 nat alturaTGrupoABB(TGrupoABB grupoABB) {
-
+    if (grupoABB == NULL) {
+        return 0;
+    }
+    int alturaIzquierda = alturaTGrupoABB(grupoABB->izq);
+    int alturaDerecha = alturaTGrupoABB(grupoABB->der);
+    return 1 + (alturaIzquierda > alturaDerecha ? alturaIzquierda : alturaDerecha);
 }
 
 int cantidadVisitantesTGrupoABB(TGrupoABB grupoABB){
-    return 0;
+    int cantVis;
+    if (grupoABB != NULL) {
+        cantVis = cantidadVisitantesTGrupoABB(grupoABB -> izq);
+        cantVis = cantidadVisitantesTGrupoABB (grupoABB -> der);
+    }
+    else 
+        return 0;
+
+    return cantVis;
+}
+
+int sumarEdades(TGrupoABB grupoABB) {
+    if (grupoABB == NULL) {
+        return 0;
+    }
+    return edadTVisitante(grupoABB -> vis) + sumarEdades(grupoABB -> izq) + sumarEdades(grupoABB -> der);
 }
 
 float edadPromedioTGrupoABB(TGrupoABB grupoABB) {
-    return 0.;
+    int sumaEdades = 0;
+    int cantidadVisitantes = cantidadVisitantesTGrupoABB(grupoABB);
+    if (cantidadVisitantes > 0) {
+        sumaEdades = sumarEdades(grupoABB);
+    }
+    return cantidadVisitantes > 0 ? (float)sumaEdades / cantidadVisitantes : 0.0f;
 }
 
-void liberarTGrupoABB(TGrupoABB &grupoABB){
 
+
+void liberarTGrupoABB(TGrupoABB &grupoABB){
+    if (grupoABB != NULL) {
+        liberarTGrupoABB(grupoABB -> izq);
+        liberarTGrupoABB(grupoABB -> der);
+        liberarTVisitante(grupoABB -> vis);
+        delete grupoABB;
+        grupoABB = NULL;
+    }
 }
 
 TVisitante maxIdTVisitanteTGrupoABB(TGrupoABB grupoABB){
@@ -167,6 +197,34 @@ TVisitante maxIdTVisitanteTGrupoABB(TGrupoABB grupoABB){
 }
 
 TVisitante obtenerNesimoVisitanteTGrupoABB(TGrupoABB grupoABB, int n){
+    // Verificamos si el árbol está vacío o si n es menor o igual a cero.
+    if (grupoABB == NULL || n <= 0) {
+        return NULL; // Si es así, retornamos NULL ya que no hay n-ésimo visitante.
+    }
+
+    // Contador para seguir el número de nodos visitados.
+    int contador = 0;
+
+    // Usamos un bucle para iterar a través del árbol en orden ascendente.
+    while (grupoABB != NULL) {
+        // Primero vamos a la izquierda.
+        if (grupoABB -> izq != NULL) {
+            grupoABB = grupoABB->izq;
+        } else {
+            // Si ya no hay más nodos a la izquierda, revisamos el nodo actual.
+            contador++; // Incrementamos el contador.
+
+            // Si el contador es igual a n, hemos encontrado el n-ésimo visitante.
+            if (contador == n) {
+                return copiarTVisitante(grupoABB -> vis); // Devolvemos una copia del visitante.
+            }
+
+            // Luego avanzamos al siguiente nodo.
+            grupoABB = grupoABB -> der;
+        }
+    }
+
+    // Si llegamos aquí, significa que no encontramos el n-ésimo visitante.
     return NULL;
 }
 
