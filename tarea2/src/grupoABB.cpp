@@ -21,7 +21,7 @@ void insertarTVisitanteTGrupoABB(TGrupoABB &grupoABB, TVisitante visitante){
         TGrupoABB actual = grupoABB;
         while (true) {
             if (idTVisitante(visitante) < idTVisitante(actual -> vis))
-                if (actual -> vis == NULL){
+                if (actual -> izq == NULL){
                     actual -> izq = nuevoNodo;
                     break;
                 }
@@ -68,96 +68,81 @@ TVisitante obtenerTVisitanteTGrupoABB(TGrupoABB grupoABB, int idVisitante){
     return grupoABB -> vis;
 }
 
-void removerTVisitanteTGrupoABB(TGrupoABB &grupoABB, int idVisitante){
 
-    TGrupoABB reemplazo = new rep_grupoABB;
-    reemplazo -> vis = NULL;
-    reemplazo -> izq = reemplazo -> der = NULL;
-    
-    TGrupoABB padre = NULL;
-    TGrupoABB actual = grupoABB;
-
-    if (idVisitante != idTVisitante(actual -> vis)) {
-        padre = actual;
-        while (idVisitante != idTVisitante(actual -> vis)) { //buscamos el visitante a remover
-            if (idVisitante < idTVisitante(actual -> vis)) 
-                actual = actual -> izq;
-            else
-                actual -> der;
-        }
+void removerTVisitanteTGrupoABB(TGrupoABB &grupoABB, int idVisitante) {
+    if (grupoABB == NULL) {
+        return; // No hay nada que eliminar si el árbol está vacío.
     }
 
-    if (actual -> izq == NULL && actual -> der == NULL) { // Caso 1 Nodo sin hijos
-        if (padre == NULL) 
-            grupoABB = actual -> der;
+    // Si el ID del visitante es menor que el ID del visitante actual, buscamos en el subárbol izquierdo.
+    if (idVisitante < idTVisitante(grupoABB -> vis)) {
+        removerTVisitanteTGrupoABB(grupoABB -> izq, idVisitante);
+    }
+    // Si el ID del visitante es mayor que el ID del visitante actual, buscamos en el subárbol derecho.
+    else if (idVisitante > idTVisitante(grupoABB -> vis)) {
+        removerTVisitanteTGrupoABB(grupoABB->der, idVisitante);
+    }
+    // Si encontramos el nodo con el ID del visitante a eliminar.
+    else {
+        // Caso 1: Nodo sin hijos o con un solo hijo.
+        if (grupoABB -> izq == NULL) {
+            TGrupoABB temp = grupoABB;
+            grupoABB = grupoABB -> der;
+            liberarTVisitante(temp -> vis);
+            delete temp;
+        } else if (grupoABB -> der == NULL) {
+            TGrupoABB temp = grupoABB;
+            grupoABB = grupoABB -> izq;
+            liberarTVisitante(temp -> vis);
+            delete temp;
+        }
+        // Caso 2: Nodo con dos hijos.
         else {
-            if (padre -> izq == actual)
-                padre -> izq = actual -> der;
+            // Encontramos el sucesor y mantenemos a su padre al tanto
+            TGrupoABB padre_suc = grupoABB;
+            TGrupoABB sucesor = grupoABB -> izq; // izq automatico porque tiene 2 hijos
+            while (sucesor -> der != NULL) {
+                padre_suc = sucesor;
+                sucesor = sucesor -> der;
+            }
+            if (padre_suc == grupoABB)
+                padre_suc -> izq = NULL;
             else
-                padre -> der = actual -> der;
+                padre_suc -> der = NULL;
+            liberarTVisitante(grupoABB -> vis);
+            grupoABB -> vis = copiarTVisitante(sucesor -> vis);
+            liberarTVisitante(sucesor -> vis);
+            delete sucesor;
         }
-        delete actual;
     }
-    else  
-        if (actual -> izq == NULL) { // Caso 2: Nodo con un hijo derecho
-            if (padre == NULL) 
-                grupoABB = actual->der;
-            else 
-                if (padre -> izq == actual) 
-                padre -> izq = actual -> der;
-            else 
-                padre -> der = actual -> der;
-            
-            delete actual;
-        }
-        else
-            if (actual -> der == NULL) { // Caso 3: Nodo con un hijo izquierdo
-                if (padre == NULL)
-                    grupoABB -> izq;
-                else 
-                    if (padre -> izq == actual)
-                        padre -> izq = actual -> izq;
-                    else
-                        padre -> der = actual -> izq;
-            }
-            else { // Caso 3: Nodo con dos hijos
-                TGrupoABB temp = actual -> izq;
-                TGrupoABB padreTemp = actual;
-                while (temp -> der != NULL) {
-                    padreTemp = temp;
-                    temp = temp -> der;
-                }
-
-                actual -> vis = temp -> vis;
-
-                if (padreTemp -> izq == temp)
-                    padreTemp -> izq = temp -> izq;
-                else
-                    padreTemp -> der = temp -> izq;
-
-                delete temp;
-            }
 }
+
 
 nat alturaTGrupoABB(TGrupoABB grupoABB) {
     if (grupoABB == NULL) {
-        return 0;
+        return 0; // La altura de un árbol vacío es 0.
+    } else {
+        // Calculamos las alturas de los subárboles izquierdo y derecho
+        nat alturaIzq = alturaTGrupoABB(grupoABB -> izq);
+        nat alturaDer = alturaTGrupoABB(grupoABB -> der);
+
+        // Comparamos las alturas y retornamos la mayor altura más 1 por el nodo actual
+        if (alturaIzq > alturaDer) {
+            return 1 + alturaIzq;
+        } else {
+            return 1 + alturaDer;
+        }
     }
-    int alturaIzquierda = alturaTGrupoABB(grupoABB->izq);
-    int alturaDerecha = alturaTGrupoABB(grupoABB->der);
-    return 1 + (alturaIzquierda > alturaDerecha ? alturaIzquierda : alturaDerecha);
 }
 
-int cantidadVisitantesTGrupoABB(TGrupoABB grupoABB){
-    int cantVis;
-    if (grupoABB != NULL) {
-        cantVis = cantidadVisitantesTGrupoABB(grupoABB -> izq);
-        cantVis = cantidadVisitantesTGrupoABB (grupoABB -> der);
-    }
-    else 
-        return 0;
 
-    return cantVis;
+int cantidadVisitantesTGrupoABB(TGrupoABB grupoABB) {
+    if (grupoABB == NULL) {
+        return 0; // Si el árbol está vacío, retorna 0.
+    } else {
+        // La cantidad de visitantes en el árbol es la suma de los visitantes en los subárboles izquierdo y derecho, más 1 por el nodo actual.
+        return 1 + cantidadVisitantesTGrupoABB(grupoABB -> izq) + cantidadVisitantesTGrupoABB(grupoABB -> der);
+    }
 }
 
 int sumarEdades(TGrupoABB grupoABB) {
@@ -168,14 +153,14 @@ int sumarEdades(TGrupoABB grupoABB) {
 }
 
 float edadPromedioTGrupoABB(TGrupoABB grupoABB) {
-    int sumaEdades = 0;
-    int cantidadVisitantes = cantidadVisitantesTGrupoABB(grupoABB);
-    if (cantidadVisitantes > 0) {
-        sumaEdades = sumarEdades(grupoABB);
+    int cantidad = cantidadVisitantesTGrupoABB(grupoABB);
+    if (cantidad == 0) {
+        return 0; // Si no hay visitantes en el grupo, devuelve 0.
+    } else {
+        float sumaEdades = sumarEdades(grupoABB);
+        return sumaEdades / cantidad; // Retorna la suma de las edades dividida por la cantidad de visitantes.
     }
-    return cantidadVisitantes > 0 ? (float)sumaEdades / cantidadVisitantes : 0.0f;
 }
-
 
 
 void liberarTGrupoABB(TGrupoABB &grupoABB){
@@ -196,35 +181,23 @@ TVisitante maxIdTVisitanteTGrupoABB(TGrupoABB grupoABB){
     return grupoABB -> vis;
 }
 
-TVisitante obtenerNesimoVisitanteTGrupoABB(TGrupoABB grupoABB, int n){
-    // Verificamos si el árbol está vacío o si n es menor o igual a cero.
+TVisitante obtenerNesimoVisitanteTGrupoABB(TGrupoABB grupoABB, int n) {
     if (grupoABB == NULL || n <= 0) {
-        return NULL; // Si es así, retornamos NULL ya que no hay n-ésimo visitante.
+        return NULL; // Si el árbol está vacío o n es menor o igual a 0, retorna NULL.
     }
 
-    // Contador para seguir el número de nodos visitados.
-    int contador = 0;
-
-    // Usamos un bucle para iterar a través del árbol en orden ascendente.
-    while (grupoABB != NULL) {
-        // Primero vamos a la izquierda.
-        if (grupoABB -> izq != NULL) {
-            grupoABB = grupoABB->izq;
-        } else {
-            // Si ya no hay más nodos a la izquierda, revisamos el nodo actual.
-            contador++; // Incrementamos el contador.
-
-            // Si el contador es igual a n, hemos encontrado el n-ésimo visitante.
-            if (contador == n) {
-                return copiarTVisitante(grupoABB -> vis); // Devolvemos una copia del visitante.
-            }
-
-            // Luego avanzamos al siguiente nodo.
-            grupoABB = grupoABB -> der;
-        }
+    int cantidadIzq = cantidadVisitantesTGrupoABB(grupoABB ->izq);
+    if (n <= cantidadIzq) {
+        // Si el n-ésimo visitante está en el subárbol izquierdo, buscamos recursivamente en ese subárbol.
+        return obtenerNesimoVisitanteTGrupoABB(grupoABB -> izq, n);
+    } else if (n == cantidadIzq + 1) {
+        // Si el n-ésimo visitante es el nodo actual, lo retornamos.
+        return grupoABB -> vis;
+    } else {
+        // Si el n-ésimo visitante está en el subárbol derecho, buscamos recursivamente en ese subárbol,
+        // ajustando el valor de n para considerar los nodos ya procesados en el subárbol izquierdo y el nodo actual.
+        return obtenerNesimoVisitanteTGrupoABB(grupoABB -> der, n - cantidadIzq - 1);
     }
-
-    // Si llegamos aquí, significa que no encontramos el n-ésimo visitante.
-    return NULL;
 }
+
 
